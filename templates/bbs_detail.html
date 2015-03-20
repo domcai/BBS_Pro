@@ -1,8 +1,16 @@
 {% extends 'index.html' %}
+{% load comments %}
 
 {% block page-content %}
-	{{ bbs_details.title }}
-	
+
+<div class="contents">
+	{{ bbs_details.title }}	
 	<br>
+	
 	{{ bbs_details.content}}
+	
+	<hr>
+	{% render_comment_list for bbs_details %}	
+</div>
+
 {% endblock %}

@@ -12,10 +12,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="/static/navbar-static-top.css" rel="stylesheet">
-
+	<link href="/static/customize.css" rel="stylesheet">
+	
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -61,7 +61,7 @@
     <div class="container center-container-hx ">
 	{% block page-content %}
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="">
+      <div class="contents">
        {% for bbs in bbs_list %}
        	<a href='/detail/{{ bbs.id }}/'> {{ bbs.title }} </a>
        	<br>
