@@ -10,7 +10,28 @@
 	{{ bbs_details.content}}
 	
 	<hr>
-	{% render_comment_list for bbs_details %}	
 </div>
-
+<div class='comments'>
+	<div>
+	{% get_comment_count for bbs_details as comment_count %}
+		<span class = 'glyphicon glyphicon-comment' />		
+		{{ comment_count }}
+	</div>
+	<br>
+	
+	<form action='/sub_comment/' method='POST'>
+	
+		<textarea rows="3" cols="80" name='comment_content'></textarea>
+		<input type='hidden' name='bbs_id' value='{{ bbs_details.id }}' />
+		<input type='submit' id='id_submit' value='Add Comment' />
+	</form>
+	
+	{% get_comment_list for bbs_details as comment_list %}
+	{% for comment in comment_list reversed %}
+		{{ comment.submit_date }}
+		<br>
+		{{ comment.comment }}
+		<hr>
+	{% endfor %}
+</div>
 {% endblock %}
