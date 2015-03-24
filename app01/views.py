@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib import comments
 import models
 #from django.template.context import RequestContext
 
@@ -21,7 +22,17 @@ def bbs_detail(request,bbs_id):
 def sub_comment(request):
     print request.POST
     bbs_id = request.POST.get('bbs_id')
-    return HttpResponseRedirect('/detail/%s'% bbs_id)
+    comment_content = request.POST.get('comment_content')
+    
+    
+    comments.models.Comment.objects.create(
+        content_type_id = 7,
+        site_id = 1,
+        object_pk = bbs_id,
+        user = request.user,
+        comment = comment_content,
+                                   )
+    return HttpResponseRedirect('/detail/%s' % bbs_id)
 
 def login(request):
     return render_to_response('login.html')
