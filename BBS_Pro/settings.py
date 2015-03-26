@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'app01',
     'django.contrib.comments',
     'django.contrib.sites',
+    'debugtools',
 )
 SITE_ID = 1
 #install comments system

@@ -7,7 +7,7 @@
 	{{ bbs_details.title }}	
 	<br>
 	
-	{{ bbs_details.content}}
+	{{ bbs_details.content|safe }}
 	
 	<hr>
 </div>
@@ -19,14 +19,23 @@
 	</div>
 	<br>
 	
-	<form action='/sub_comment/' method='POST'>
+	{% if user.is_authenticated %}
 	
-		<textarea rows="3" cols="80" name='comment_content'></textarea>
-		<input type='hidden' name='bbs_id' value='{{ bbs_details.id }}' />
-		<input type='submit' id='id_submit' value='Add Comment' />
-	</form>
+		<form action='/sub_comment/' method='POST'>
+		
+			<textarea rows="3" cols="80" name='comment_content'></textarea>
+			<input type='hidden' name='bbs_id' value='{{ bbs_details.id }}' />
+			<input type='submit' id='id_submit' value='Add Comment' />
+		</form>
+		
+	{% else %}
+		<p>Please <a href='/login/'>Login</a> to add a comment!</p>
+		
+	{% endif %}
+	
 	
 	{% get_comment_list for bbs_details as comment_list %}
+	
 	{% for comment in comment_list reversed %}
 		{{ comment.submit_date }}
 		<br>
